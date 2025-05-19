@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart - MakhanaStore</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <h1 class="logo">MakhanaStore</h1>
+      <input type="text" placeholder="Search for Makhana..." class="search-bar"/>
+      <div class="nav-icons">
+        <a href="index.html"><span class="material-icons">home</span></a>
+        <a href="cart.html"><span class="material-icons">shopping_cart</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Cart Section -->
+  <section class="cart container">
+    <h2>Your Shopping Cart</h2>
+    <div id="cart-items"></div>
+    <div id="cart-summary">
+      <h3>Total: ₹<span id="total-price">0</span></h3>
+      <a href="checkout.html" class="btn">Proceed to Checkout</a>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

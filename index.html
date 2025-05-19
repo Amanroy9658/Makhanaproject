@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Makhana Store</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+  <!-- 🔹 Navbar -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <h1 class="logo">MakhanaStore.in</h1>
+      <input type="text" placeholder="Search for Makhana..." class="search-bar" />
+      <div class="nav-icons">
+        <a href="#"><span class="material-icons">person</span></a> 
+        <a href="cart.html"><span class="material-icons">shopping_cart</span></a>
+      </div>
+    </div>
+
+    <div class="cart-icon" onclick="toggleCart()">
+      🛒 Cart (<span id="cart-count">0</span>)
+    </div>
+
+    <div id="cart-modal" class="cart-modal" style="display:none;">
+      <h3>Your Cart</h3>
+      <ul id="cart-items"></ul>
+      <p>Total: ₹<span id="cart-total">0</span></p>
+      <button onclick="toggleCart()">Close</button>
+      <button onclick="openCheckout()" class="checkout-btn">Checkout</button>
+    </div>
+
+    <div id="checkout-form" class="checkout-form" style="display:none;">
+      <h3>Checkout</h3>
+      <form onsubmit="submitOrder(event)">
+        <input type="text" id="customerName" placeholder="Full Name" required>
+        <input type="tel" id="customerPhone" placeholder="Phone Number" required>
+        <textarea id="customerAddress" placeholder="Delivery Address" required></textarea>
+        <button type="submit">Place Order</button>
+        <button type="button" onclick="closeCheckout()">Cancel</button>
+      </form>
+    </div>
+
+    <div id="order-confirmation" class="order-confirmation" style="display:none;">
+      <h3>🎉 Order Placed Successfully!</h3>
+      <p>Thank you for shopping with us. We'll deliver your Makhana soon!</p>
+      <button onclick="returnHome()">Shop More</button>
+    </div>
+  </header>
+
+  <!-- 🔹 Hero Banner -->
+  <section class="hero-carousel">
+    <div class="carousel">
+      <img src="makhanaimage.jpeg" class="carousel-image active" alt="Makhana 1" />
+      <img src="makhanaimg1.jpeg" class="carousel-image" alt="Makhana 2" />
+      <img src="makhanaimage2.jpeg" class="carousel-image" alt="Makhana 3" />
+      <img src="makhanaimg3.jpeg" class="carousel-image" alt="Makhana 4" />
+    </div>
+    <div class="hero-content">
+      <h2>Healthy. Crunchy. Organic.</h2>
+      <p>Get the best Makhana direct from farmers of Bihar.</p>
+      <a href="#" class="btn">Shop Now</a>
+    </div>
+  </section>
+
+  <!-- 🔹 Product Section -->
+  <section class="products container">
+    <h2>Best Sellers</h2>
+    <div class="product-filters">
+      <input type="text" id="searchBar" placeholder="Search products..." onkeyup="filterProducts()" />
+      <select id="flavorFilter" onchange="filterProducts()">
+        <option value="">All Flavors</option>
+        <option value="classic">Classic</option>
+        <option value="spicy">Spicy</option>
+        <option value="peri peri">Peri Peri</option>
+        <option value="cream & onion">Cream & Onion</option>
+        <option value="mint">Mint</option>
+        <option value="choco">Choco</option>
+      </select>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card" data-name="classic makhana" data-flavor="classic">
+        <img src="makhanaimage2.jpeg" alt="Classic Makhana" />
+        <h3>Classic Makhana</h3>
+        <p>Lightly roasted and salted makhana.</p>
+        <span>₹180</span>
+        <button onclick="addToCart('Classic Makhana', 180, 'makhanaimage2.jpeg')">Add to Cart</button>
+      </div>
+
+      <div class="product-card" data-name="spicy makhana" data-flavor="spicy">
+        <img src="makhanaimg1.jpeg" alt="Spicy Makhana" />
+        <h3>Spicy Makhana</h3>
+        <p>Flavored with Indian spices.</p>
+        <span>₹200</span>
+        <button onclick="addToCart('Spicy Makhana', 200, 'makhanaimg1.jpeg')">Add to Cart</button>
+      </div>
+
+      <div class="product-card" data-name="peri peri makhana" data-flavor="peri peri">
+        <img src="makhanaimg4.jpeg" alt="Peri Peri Makhana" />
+        <h3>Peri Peri Makhana</h3>
+        <p>Zesty Peri Peri flavor for spice lovers.</p>
+        <span>₹220</span>
+        <button onclick="addToCart('Peri Peri Makhana', 220, 'makhanaimg4.jpeg')">Add to Cart</button>
+      </div>
+
+      <div class="product-card" data-name="cream & onion makhana" data-flavor="cream & onion">
+        <img src="makhanaimg1.jpeg" alt="Cream & Onion Makhana" />
+        <h3>Cream & Onion Makhana</h3>
+        <p>Delicious cream and onion flavor.</p>
+        <span>₹210</span>
+        <button onclick="addToCart('Cream & Onion Makhana', 210, 'makhanaimg1.jpeg')">Add to Cart</button>
+      </div>
+
+      <div class="product-card" data-name="mint makhana" data-flavor="mint">
+        <img src="makhanaimg5.jpeg" alt="Mint Makhana" />
+        <h3>Mint Makhana</h3>
+        <p>Refreshing mint-infused snack.</p>
+        <span>₹190</span>
+        <button onclick="addToCart('Mint Makhana', 190, 'makhanaimg5.jpeg')">Add to Cart</button>
+      </div>
+
+      <div class="product-card" data-name="choco makhana" data-flavor="choco">
+        <img src="makhanaimage.jpeg" alt="Choco Makhana" />
+        <h3>Choco Makhana</h3>
+        <p>Sweet chocolate coated makhana.</p>
+        <span>₹230</span>
+        <button onclick="addToCart('Choco Makhana', 230, 'makhanaimage.jpeg')">Add to Cart</button>
+      </div>
+
+      <div class="product-card" data-name="premium makhana" data-flavor="premium">
+        <img src="makhanaimg4.jpeg" alt="Premium Makhana" />
+        <h3>Premium Makhana (250g)</h3>
+        <p>High quality premium makhana.</p>
+        <span>₹1200</span>
+        <button onclick="addToCart('Premium Makhana (250g)', 1200, 'makhanaimg4.jpeg')">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔹 Footer -->
+  <footer class="footer">
+    <div class="footer-content container">
+      <div class="footer-col">
+        <h3>Company</h3>
+        <ul>
+          <li>About Us</li>
+          <li>Contact</li>
+          <li>Careers</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Support</h3>
+        <ul>
+          <li>FAQs</li>
+          <li>Returns</li>
+          <li>Shipping Info</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Follow Us</h3>
+        <ul>
+          <li>Instagram</li>
+          <li>Facebook</li>
+          <li>Twitter</li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 MakhanaStore</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
